@@ -1,10 +1,11 @@
-<!doctype html>
-<html lang="zh">
-<head>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head lang="en">
 <meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Demo</title>
+<title></title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}" />
 </head>
@@ -42,41 +43,46 @@
 			</div>
 		</div>
 	</div>
-
-	<script src="js/jquery-1.11.0.min.js"></script>
-	<script src="js/jq-signature.js"></script>
-	<script type="text/javascript">
-		$(document).on('ready', function() {
-			if ($('.js-signature').length) {
-				$('.js-signature').jqSignature();
-			}
-		});
-
-		function clearCanvas() {
-			$('#signature')
-				.html('<p><em>Your signature will appear here when you click "Save Signature"</em></p>');
-			$('.js-signature').eq(1).jqSignature('clearCanvas');
-			$('#saveBtn').attr('disabled', true);
-		}
-
-		function saveSignature() {
-			$('#signature').empty();
-			var dataUrl = $('.js-signature').eq(1).jqSignature('getDataURL');
-			var img = $('<img>').attr('src', dataUrl).$('</img>');
-			$('#signature').append($('<p>').text("Here's your signature:")).append($('</p>'));
-			$('#signature').append(img);
-			$.ajax({
-	            type: "post",
-	            url: "/hello/signature",    //向springboot请求数据的url
-	            data: {
-	            	  dataUrl: dataUrl
-	            	}
-	        });
-		}
-
-		$('.js-signature').eq(1).on('jq.signature.changed', function() {
-			$('#saveBtn').attr('disabled', false);
-		});
-	</script>
 </body>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/jq-signature.js}"></script>
+<script type="text/javascript">
+	$(document).on('ready', function() {
+		if ($('.js-signature').length) {
+			$('.js-signature').jqSignature();
+		}
+	});
+
+	function clearCanvas() {
+		$('#signature')
+			.html('<p><em>Your signature will appear here when you click "Save Signature"</em></p>');
+		$('.js-signature').eq(1).jqSignature('clearCanvas');
+		$('#saveBtn').attr('disabled', true);
+	}
+
+	function saveSignature() {
+		$('#signature').empty();
+		var dataUrl = $('.js-signature').eq(1).jqSignature('getDataURL');
+		/* var img = $('<img>').attr('src', dataUrl);
+		$('#signature').append($('<p>').text("Here's your signature:")).append($('</p>'));
+		$('#signature').append(img).append($('</img>')); */
+		$.ajax({
+            type: "post",
+            url: "/hello/signature",    //向springboot请求数据的url
+            contentType: "application/json; charset=UTF-8",
+            data: JSON.stringify({
+            		img : dataUrl
+            	}),
+            success: function (form) {
+	        		var img = $('<img>').attr('src', form.img);
+	        		$('#signature').append($('<p>').text("Here's your signature:")).append($('</p>'));
+	        		$('#signature').append(img).append($('</img>'));
+            }
+        });
+	}
+	
+	$('.js-signature').eq(1).on('jq.signature.changed', function() {
+		$('#saveBtn').attr('disabled', false);
+	});
+</script>
 </html>

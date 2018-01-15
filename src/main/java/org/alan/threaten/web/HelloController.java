@@ -1,5 +1,6 @@
 package org.alan.threaten.web;
 
+import org.alan.threaten.entity.Form;
 import org.alan.threaten.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -55,9 +56,16 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/signature", method = RequestMethod.POST)
-    public void signature(@RequestBody Map<String, Object> reqMap) {
+    @ResponseBody
+    public Form signature(@RequestBody Map<String, Object> reqMap) {
         for (Map.Entry<String, Object> entry : reqMap.entrySet()) {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
+        Form form = new Form();
+        form.setId(1);
+        form.setLine1("line1");
+        form.setLine2("line2");
+        form.setImg((String)reqMap.get("img"));
+        return form;
     }
 }
