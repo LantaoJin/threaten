@@ -20,14 +20,12 @@ public class HelloController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
         modelMap.put("msg", "SpringBoot Ajax 示例");
-
         return "index";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     @ResponseBody
     public String home() {
-
         return "home";
     }
 
@@ -35,7 +33,6 @@ public class HelloController {
     @ResponseBody
     public List<User> data() {
         List<User> list = new ArrayList<User>();
-
         for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setId(i + 1);
@@ -43,10 +40,8 @@ public class HelloController {
             user.setSex("male");
             user.setAge(i + 1);
             user.setRole("developer");
-
             list.add(user);
         }
-
         return list;
     }
     

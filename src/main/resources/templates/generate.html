@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<style>
+body {
+	padding-top: 50px;
+}
+
+.starter {
+	padding: 40px 15px;
+	text-align: center;
+}
+</style>
+</head>
+<body ms-controller="generate_model">
+	<nav class="navbar navbar-inverse nav-fixed-top" role="navigation">
+		<div class="container">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">现代通力 库存系统</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/generate/index">创建</a></li>
+					<li><a href="/signature/list">签收</a></li>
+					<li><a href="/delivery/list">入账</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<form class="form-horizontal">
+			<fieldset>
+				<div id="legend" class="">
+					<legend class="">创建X单</legend>
+				</div>
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">单号</label>
+					<div class="controls">
+						<input type="text" placeholder="No110" class="col-md-12" />
+						<p class="help-block">请输入X单唯一单号</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">货名</label>
+					<div class="controls">
+						<input type="text" placeholder="xx升降器" class="input-xlarge" />
+						<p class="help-block">货名</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">价格</label>
+					<div class="controls">
+						<input type="text" placeholder="10000.00" class="input-xlarge" />
+						<p class="help-block">请输入数字</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">数量</label>
+					<div class="controls">
+						<input type="text" placeholder="2" class="input-xlarge" />
+						<p class="help-block">请输入数字</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Select Basic -->
+					<label class="control-label">分类</label>
+					<div class="controls">
+						<select class="input-xlarge">
+							<option>分类一</option>
+							<option>分类二</option>
+							<option>分类三</option>
+							<option>分类四</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">是否结算</label>
+					<div class="controls">
+						<!-- Multiple Radios -->
+						<label class="radio"> <input type="radio" value="已结算"
+							name="cleaned" checked="checked" /> 已结算
+						</label> <label class="radio"> <input type="radio" value="未结算"
+							name="cleaned" /> 未结算
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Textarea -->
+					<label class="control-label">备注</label>
+					<div class="controls">
+						<div class="textarea">
+							<textarea type="" class=""> </textarea>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</body>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/js/avalon.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/generate.js}"></script>
+</html>
